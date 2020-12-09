@@ -42,7 +42,7 @@ def main():
         logger = logging.getLogger('idx-log')
 
         with subprocess.Popen(idx_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, ) as popen:
-            for stdout_line in iter(popen.stdout.readline, ""):
+            for stdout_line in iter(popen.stdout.readline, b""):
                 logger.info(stdout_line.strip())
 
 
