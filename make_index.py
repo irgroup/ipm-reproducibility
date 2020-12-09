@@ -15,9 +15,15 @@ cmd = ['./anserini/target/appassembler/bin/IndexCollection',
        '-storeRaw',
        '-stopwords', './stopwords/en/terrier.txt']
 
+log_path = './log'
+
+try:
+    os.mkdir(log_path)
+except OSError as error:
+    print(error)
 
 name = 'index-logger'
-file = 'index.core18.log'
+file = os.path.join(log_path,'index.core18.log')
 loglevel = logging.NOTSET
 logging.basicConfig(level=loglevel,
                     filename=file,
