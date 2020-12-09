@@ -3,6 +3,7 @@ import subprocess
 import os
 os.environ['JAVA_HOME'] = '/usr/lib/jvm/java-11-openjdk-amd64'
 
+
 cmd = ['./anserini/target/appassembler/bin/IndexCollection',
        '-collection', 'WashingtonPostCollection',
        '-input', '/home/breuert/data/orig/core18/',
@@ -12,7 +13,7 @@ cmd = ['./anserini/target/appassembler/bin/IndexCollection',
        '-storePositions',
        '-storeDocvectors',
        '-storeRaw',
-       '-stopwords', '/home/breuert/code/stopwords/en/terrier.txt']
+       '-stopwords', './stopwords/en/terrier.txt']
 
 
 name = 'index-logger'
@@ -22,6 +23,10 @@ logging.basicConfig(level=loglevel,
                     filename=file,
                     format='%(asctime)s %(levelname)s %(filename)s %(funcName)s - %(message)s')
 logger = logging.getLogger(name)
+
 logger.info("Logging started!")
 
-subprocess.run(cmd)
+with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,) as popen:
+    for stdout_line in iter(popen.stdout.readline, ""):
+        logger.info(stdout_line.strip())
+
