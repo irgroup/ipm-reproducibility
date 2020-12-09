@@ -1,4 +1,13 @@
-# Setup instructions
+## Datasets
+
+| collection | docs | index time | index size | source | qrels | topics | 
+| --- | --- | --- | --- | --- | --- | --- |
+| core17 | 1.8 million | 00:07:03 | 8.4 GB | [New York Times Annotated Corpus](https://catalog.ldc.upenn.edu/LDC2008T19)| [Core17](https://trec.nist.gov/data/core/qrels.txt)| [Core17](https://trec.nist.gov/data/core/core_nist.txt)|
+| core18 | 0.6 million | 00:09:17 | 4.8 GB |[TREC Washington Post Corpus](https://trec.nist.gov/data/wapost/) | [Core18](https://trec.nist.gov/data/core/qrels2018.txt)| [Core18](https://trec.nist.gov/data/core/topics2018.txt)|
+| robust04 | 0.5 million | 00:01:28 | 2.0 GB | [TREC disks 4 and 5](https://trec.nist.gov/data/cd45/index.html)| [Robust04](https://trec.nist.gov/data/robust/qrels.robust2004.txt)| [Robust04](https://trec.nist.gov/data/robust/04.testset.gz)|
+| robust05 | 1 million | 00:02:25 | 3.6 GB | [The AQUAINT Corpus of English News Text](https://catalog.ldc.upenn.edu/LDC2002T31)| [Robust05](https://trec.nist.gov/data/robust/05/TREC2005.qrels.txt)| [Robust05](https://trec.nist.gov/data/robust/05/05.50.topics.txt)|
+
+## Setup instructions
 
 **1. Clone this repository:**
 ```
