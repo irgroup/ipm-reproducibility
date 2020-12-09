@@ -19,13 +19,12 @@ git clone --recurse-submodules https://github.com/breuert/ipm-repro.git
 sh build.sh
 ```
 
-alternatively run:
+**3. Install requirements**
 ```
-cd anserini/tools/eval && tar xvfz trec_eval.9.0.4.tar.gz && cd trec_eval.9.0.4 && make && cd ../../..
-mvn clean package appassembler:assemble -DskipTests -Dmaven.javadoc.skip=true
-``` 
+pip install -r requirements.txt
+```
 
-**3. Specify the paths to the input data in `make_config.py`, e.g. for the TREC Washington Post Collection:**
+**4. Specify the paths to the input data in `make_config.py`, e.g. for the TREC Washington Post Collection:**
 ```
 'core18': {'input': '/SPECIFY/YOUR/PATH/HERE',
            'collection': 'WashingtonPostCollection',        
@@ -33,12 +32,12 @@ mvn clean package appassembler:assemble -DskipTests -Dmaven.javadoc.skip=true
            'threads': '1'}
 ```
 
-**4. Make the `index.config` file with:**
+**5. Make the `index.config` and `search.config` files with:**
 ```
 python make_config.py
 ```
 
-It will ouput a file with entries like this one:
+`index.config` will contain entries like this one:
 
     "robust04.indri.krovetz": {
         "collection": "TrecCollection",
@@ -50,7 +49,39 @@ It will ouput a file with entries like this one:
         "stemmer": "krovetz"
     }
 
-**5. Build indexes with `make_index.py`**
+`search.config` will contain entries like this one:
+
+    "run.bm25.noStopwords.porter.title.core18.indri.porter": [
+        "./anserini/target/appassembler/bin/SearchCollection",
+        "-index",
+        "./anserini/indexes/core18.indri.porter",
+        "-topicreader",
+        "Trec",
+        "-topics",
+        "./anserini/src/main/resources/topics-and-qrels/topics.core18.txt",
+        "-output",
+        "./anserini/runs/run.bm25.noStopwords.porter.title.core18.indri.porter",
+        "-bm25",
+        "-bm25.b",
+        "0.0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1.0",
+        "-bm25.k1",
+        "1.0 1.05 1.1 1.15 1.2 1.25 1.3 1.35 1.4 1.45 1.5 1.55 1.6 1.65 1.7 1.75 1.8 1.85 1.9 1.95 2.0",
+        "-stemmer",
+        "porter",
+        "-topicfield",
+        "title",
+        "-runtag",
+        "ipm-repro"
+    ]
+
+**6. Build indexes with `make_index.py`**
 ```
 python make_index.py
+```
+
+If you use all four test collections, this will results in 48 indexes with a total size of **225,6G** (= 12 * 8.4G + 12 * 4.8G + 12 * 2.0G + 12 * 3.6G)
+
+**7. Retrieval**
+```
+python search.py
 ```
