@@ -74,7 +74,9 @@ pip install -r requirements.txt
            'threads': '1'}
 ```
 
-**5. Make the `index.config` and `search.config` files with:**
+**5. Specifiy the path to your Java 11 installation and add it with `os.environ['JAVA_HOME']` in `make_index.py` and `search.py`.**
+
+**6. Make the `index.config` and `search.config` files with:**
 ```
 python make_config.py
 ```
@@ -116,14 +118,14 @@ python make_config.py
         "ipm-repro"
     ]
 
-**6. Build indexes with `make_index.py`**
+**7. Build indexes with `make_index.py`**
 ```
 python make_index.py
 ```
 
 If you use all four test collections, this will results in 48 indexes with a total size of **225,6G** [1].
 
-**7. Retrieval**
+**8. Retrieval**
 ```
 python search.py
 ```
