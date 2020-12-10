@@ -1,3 +1,45 @@
+## Current status
+
+- [x] Principled generation of index and search configurations that can be used with [Anserini](https://github.com/castorini/anserini)
+- [x] Generation of Lucene-based indexes with Anserini
+- [x] Runs derived from Lucene-based indexes with Anserini
+- [ ] Runs derived with other toolkits like [Terrier](https://github.com/terrier-org/terrier-core) or [Lucindri](https://github.com/lemurproject/Lucindri)
+
+## Notes
+
+- :heavy_check_mark: Directly ingesting the Lucene-based index with the [Lucene plugin](https://github.com/terrierteam/terrier-lucene) of [Terrier](https://github.com/terrier-org/terrier-core) without converting the index into the [CIFF](https://github.com/osirrc/ciff) format and deriving runs based on BM25
+- :x: Could not ingest the Lucene-based index into [Lucindri](https://github.com/lemurproject/Lucindri) &rarr; discrepancy between Lucene versions
+- :x: [Lucindri](https://github.com/lemurproject/Lucindri) does not support BM25+RM3 at the current stage
+- :x: Could not run the [CIFF plugin of Terrier](https://github.com/terrierteam/terrier-ciff)
+- :x: Could not run the [PRF plugin of Terrier](https://github.com/terrierteam/terrier-prf), that is required for RM3, in combination with the [Lucene plugin of Terrier](https://github.com/terrierteam/terrier-lucene)
+- :x: The other retrieval toolkits supporting [CIFF](https://github.com/osirrc/ciff) do not implement any PRF mechanisms like RM3
+
+### Links
+
+- [Getting started with Lucindri](https://lemurproject.org/lucindri.php)
+
+## Considered components and corresponding variations
+
+### Indexing
+
+- Collection = {Core17, Core18, Robust04, Robust05}
+- Stopwords = {None, Indri, Terrier, SMART}
+- Stemmers = {None, Porter, Krovetz}
+
+**Under the consideration of all possible combinations, this will result in 48 indexes.**
+
+### Retrieval
+
+- Retrieval methods = {BM25, BM25+RM3}
+- Considered topicfields for the query = {Title, Title+Description}
+- Stopwords [y/n]
+- Stemmers = {None, Porter, Krovetz}
+- BM25.k1 = [1.0 ... 2.0]
+- BM25.b = [0.0 ... 1.0]
+- RM3's number of feedback terms = [1 ... 10]
+- RM3's number of feedback documents = [1 ... 10]
+- RM3's weighting of old query = [0.1 ... 0.9]
+
 ## Datasets
 
 | collection | docs | index time | index size | source | qrels | topics | 
