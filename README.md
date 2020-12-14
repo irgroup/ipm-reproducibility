@@ -53,7 +53,7 @@
 
 **1. Clone this repository:**
 ```
-git clone --recurse-submodules https://github.com/breuert/ipm-repro.git
+git clone --recurse-submodules https://github.com/irgroup/ipm-repro.git
 ```
 
 **2. Build anserini and the corresponding tools:**
