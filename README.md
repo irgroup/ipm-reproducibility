@@ -16,7 +16,7 @@
 
 ### Links
 
-- [Runs](https://th-koeln.sciebo.de/s/cP1ddwW4LpTN8y6)
+- [Shared resources, e.g. runs](https://th-koeln.sciebo.de/s/cP1ddwW4LpTN8y6)
 
 ## Considered components and corresponding variations
 
