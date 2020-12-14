@@ -16,7 +16,7 @@
 
 ### Links
 
-- [Getting started with Lucindri](https://lemurproject.org/lucindri.php)
+- [Runs](https://th-koeln.sciebo.de/s/cP1ddwW4LpTN8y6)
 
 ## Considered components and corresponding variations
 
