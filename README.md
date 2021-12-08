@@ -1,54 +1,3 @@
-## Current status
-
-- [x] Principled generation of index and search configurations that can be used with [Anserini](https://github.com/castorini/anserini)
-- [x] Generation of Lucene-based indexes with Anserini
-- [x] Runs derived from Lucene-based indexes with Anserini
-- [ ] Runs derived with other toolkits like [Terrier](https://github.com/terrier-org/terrier-core) or [Lucindri](https://github.com/lemurproject/Lucindri)
-
-## Notes
-
-- :heavy_check_mark: Directly ingesting the Lucene-based index with the [Lucene plugin](https://github.com/terrierteam/terrier-lucene) of [Terrier](https://github.com/terrier-org/terrier-core) without converting the index into the [CIFF](https://github.com/osirrc/ciff) format and deriving runs based on BM25
-- :x: Could not ingest the Lucene-based index into [Lucindri](https://github.com/lemurproject/Lucindri) &rarr; discrepancy between Lucene versions
-- :x: [Lucindri](https://github.com/lemurproject/Lucindri) does not support BM25+RM3 at the current stage
-- :x: Could not run the [CIFF plugin of Terrier](https://github.com/terrierteam/terrier-ciff)
-- :x: Could not run the [PRF plugin of Terrier](https://github.com/terrierteam/terrier-prf), that is required for RM3, in combination with the [Lucene plugin of Terrier](https://github.com/terrierteam/terrier-lucene)
-- :x: The other retrieval toolkits supporting [CIFF](https://github.com/osirrc/ciff) do not implement any PRF mechanisms like RM3
-
-### Links
-
-- [Shared resources, e.g. runs](https://th-koeln.sciebo.de/s/cP1ddwW4LpTN8y6)
-
-## Considered components and corresponding variations
-
-### Indexing
-
-- Collection = {Core17, Core18, Robust04, Robust05}
-- Stopwords = {None, Indri, Terrier, SMART}
-- Stemmers = {None, Porter, Krovetz}
-
-**Under the consideration of all possible combinations, this will result in 48 indexes.**
-
-### Retrieval
-
-- Retrieval methods = {BM25, BM25+RM3}
-- Considered topicfields for the query = {Title, Title+Description}
-- Stopwords [y/n]
-- Stemmers = {None, Porter, Krovetz}
-- BM25.k1 = [1.0 ... 2.0]
-- BM25.b = [0.0 ... 1.0]
-- RM3's number of feedback terms = [1 ... 10]
-- RM3's number of feedback documents = [1 ... 10]
-- RM3's weighting of old query = [0.1 ... 0.9]
-
-## Datasets
-
-| collection | docs | index time | index size | source | qrels | topics | 
-| --- | --- | --- | --- | --- | --- | --- |
-| core17 | 1.8 million | 00:07:03 | 8.4 GB | [New York Times Annotated Corpus](https://catalog.ldc.upenn.edu/LDC2008T19)| [Core17](https://trec.nist.gov/data/core/qrels.txt)| [Core17](https://trec.nist.gov/data/core/core_nist.txt)|
-| core18 | 0.6 million | 00:09:17 | 4.8 GB |[TREC Washington Post Corpus](https://trec.nist.gov/data/wapost/) | [Core18](https://trec.nist.gov/data/core/qrels2018.txt)| [Core18](https://trec.nist.gov/data/core/topics2018.txt)|
-| robust04 | 0.5 million | 00:01:28 | 2.0 GB | [TREC disks 4 and 5](https://trec.nist.gov/data/cd45/index.html)| [Robust04](https://trec.nist.gov/data/robust/qrels.robust2004.txt)| [Robust04](https://trec.nist.gov/data/robust/04.testset.gz)|
-| robust05 | 1 million | 00:02:25 | 3.6 GB | [The AQUAINT Corpus of English News Text](https://catalog.ldc.upenn.edu/LDC2002T31)| [Robust05](https://trec.nist.gov/data/robust/05/TREC2005.qrels.txt)| [Robust05](https://trec.nist.gov/data/robust/05/05.50.topics.txt)|
-
 ## Setup instructions
 
 **1. Clone this repository:**
@@ -129,6 +78,3 @@ If you use all four test collections, this will results in 48 indexes with a tot
 ```
 python search.py
 ```
-
----
-[1]  12*(8.4G+4.8G+2.0G+3.6G)=225,6G
