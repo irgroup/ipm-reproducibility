@@ -72,8 +72,6 @@ python make_config.py
 python make_index.py
 ```
 
-If you use all four test collections, this will results in 48 indexes with a total size of **225,6G** [1].
-
 **8. Retrieval**
 ```
 python search.py
