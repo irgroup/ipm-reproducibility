@@ -4,3 +4,4 @@ log/*
 index.config
 search.config
 playground.py
+measure_scores/*
